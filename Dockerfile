@@ -13,7 +13,7 @@ RUN apk add -U --no-cache ca-certificates
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -a -o /app github.com/alkapa/quasar-fire/cmd
 
-FROM scratch as server
+FROM alpine:3.13.0 as server
 WORKDIR /root/
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /app cmd/app
