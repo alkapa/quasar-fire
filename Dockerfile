@@ -5,6 +5,7 @@ COPY cmd cmd
 COPY internal internal
 COPY pkg pkg
 COPY vendor vendor
+COPY utils utils
 COPY go.mod .
 COPY go.sum .
 
