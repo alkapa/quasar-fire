@@ -1,0 +1,13 @@
+version: "2"
+services:
+  serve:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      GRPC_PORT: "50052"
+      REST_PORT: "9090"
+    entrypoint: ./cmd/app serve quasar
+    restart: on-failure
+    ports:
+      - "9090:9090"

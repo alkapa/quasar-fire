@@ -1,0 +1,252 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Quasar fire",
+    "version": "1.0",
+    "contact": {
+      "name": "alkapa",
+      "url": "https://github.com/alkapa",
+      "email": "juan.camilo.gutierrez.alkapa@gmail.com"
+    },
+    "license": {}
+  },
+  "tags": [
+    {
+      "name": "QuasarFire"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/topsecret": {
+      "post": {
+        "operationId": "QuasarFire_TopSecret",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1TopSecretResponse"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1TopSecretRequest"
+            }
+          }
+        ],
+        "tags": [
+          "QuasarFire"
+        ]
+      }
+    },
+    "/topsecret_split": {
+      "get": {
+        "operationId": "QuasarFire_TopSecretSplitGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1TopSecretResponse"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "QuasarFire"
+        ]
+      }
+    },
+    "/topsecret_split/{name}": {
+      "post": {
+        "operationId": "QuasarFire_TopSecretSplitSet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1TopSecretResponse"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "kenobi",
+              "skywalker",
+              "sato"
+            ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SatelliteSecretMessageSplit"
+            }
+          }
+        ],
+        "tags": [
+          "QuasarFire"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "v1Position": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "format": "float"
+        },
+        "y": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "v1SatelliteAllianceName": {
+      "type": "string",
+      "enum": [
+        "kenobi",
+        "skywalker",
+        "sato"
+      ]
+    },
+    "v1SatelliteSecretMessage": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/v1SatelliteAllianceName"
+        },
+        "distance": {
+          "type": "number",
+          "format": "float"
+        },
+        "message": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1SatelliteSecretMessageSplit": {
+      "type": "object",
+      "properties": {
+        "distance": {
+          "type": "number",
+          "format": "float"
+        },
+        "message": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1TopSecretRequest": {
+      "type": "object",
+      "properties": {
+        "satellites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1SatelliteSecretMessage"
+          }
+        }
+      }
+    },
+    "v1TopSecretResponse": {
+      "type": "object",
+      "properties": {
+        "position": {
+          "$ref": "#/definitions/v1Position"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

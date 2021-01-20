@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package quasar.v1;
+option go_package = "github.com/alkapa/quasar-fire/pkg/api/v1/quasar";
+
+import "google/api/annotations.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/descriptor.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Quasar fire";
+    version: "1.0";
+    description: "";
+    contact: {
+      name: "alkapa";
+      url: "https://github.com/alkapa";
+      email: "juan.camilo.gutierrez.alkapa@gmail.com";
+    };
+    license: {
+      name: "";
+      url: "";
+    };
+  };
+  schemes: HTTP;
+  consumes: "application/json";
+  produces: "application/json";
+};
+
+
+enum SatelliteAllianceName {
+  NONE_ALLY = 0;
+  kenobi = 1;
+  skywalker = 2;
+  sato = 3;
+}
+
+message Position {
+  float x = 1;
+  float y = 2;
+}
+
+message SatelliteSecretMessage {
+  SatelliteAllianceName name = 1;
+  float distance = 2;
+  repeated string message = 3;
+}
+
+message TopSecretRequest {
+  repeated SatelliteSecretMessage satellites = 1;
+}
+message TopSecretResponse {
+  Position position = 1;
+  string message = 2;
+}
+
+service QuasarFire {
+  rpc TopSecret(TopSecretRequest) returns (TopSecretResponse) {
+    option (google.api.http) = {
+      post: "/topsecret"
+      body: "*"
+    };
+  };
+  rpc TopSecretSplitGet(google.protobuf.Any) returns (TopSecretResponse){
+    option (google.api.http) = {
+      get: "/topsecret_split"
+    };
+  };
+
+  rpc TopSecretSplitSet(SatelliteSecretMessage) returns (TopSecretResponse) {
+    option (google.api.http) = {
+      post: "/topsecret_split/{name}"
+      body: "*"
+    };
+  }
+}
