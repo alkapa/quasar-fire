@@ -44,7 +44,9 @@ func serve(_ *cobra.Command, _ []string) error {
 
 	restPort := os.Getenv("REST_PORT")
 	if restPort == "" {
-		restPort = "8080"
+		if restPort = os.Getenv("PORT"); restPort == "" {
+			restPort = "8080"
+		}
 	}
 
 	restSrv, err := gateway.NewServer(

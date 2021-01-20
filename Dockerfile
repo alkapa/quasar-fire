@@ -18,5 +18,3 @@ WORKDIR /root/
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /app cmd/app
 COPY swagger-ui swagger-ui
-
-ENTRYPOINT ["./cmd/app"]
