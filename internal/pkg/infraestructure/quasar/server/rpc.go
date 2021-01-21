@@ -55,7 +55,7 @@ func (s *server) TopSecretSplitGet(ctx context.Context, _ *any.Any) (*pb.TopSecr
 	)
 
 	if !(s.repository.Count() > 0) {
-		msg := "not sufficient data"
+		msg := "insufficient data"
 		log.WithFields(
 			logrus.Fields{
 				"repository": s.repository.Type(),
