@@ -21,7 +21,7 @@ REST_PORT   |   8080
 
 **in heroku use PORT env to set REST_PORT value*
 
-###CLI
+### CLI
 
 *__serve quasar__*: start grpc and rest services
 
